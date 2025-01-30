@@ -1,1 +1,1 @@
-The backend service for Miracle-Hotel Application
+The backend service for Miracle-Hotel Project
