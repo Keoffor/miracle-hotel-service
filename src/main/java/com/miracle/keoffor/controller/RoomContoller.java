@@ -42,7 +42,7 @@ public class RoomContoller {
           RoomResponse response = new RoomResponse(savedRoom.getId(),savedRoom.getRoomType(),
                   savedRoom.getRoomPrice());
 
-         return ResponseEntity.ok(response);
+         return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
     }
     @PutMapping("/update/{roomId}")

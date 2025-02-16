@@ -65,12 +65,12 @@ public class BookedRoomServiceImpl implements BookedRoomService {
 
     @Override
     public List<BookedRoomDto> getUserBookedRooms(String email) {
-        List<BookedRoom> response = bookedRoomRespository.findByGuestEmail(email).stream().toList();
-          List<BookedRoomDto> result = response.stream().map(BookedRoomDto::convertToDto).toList();
-        if(result.isEmpty()){
+        List<BookedRoomDto> bookedRoomDto = bookedRoomRespository.findByGuestEmail(email)
+                .stream().map(BookedRoomDto::convertToDto).toList();
+        if(bookedRoomDto.isEmpty()){
             throw new UsernameNotFoundException("User name is not found");
         }
-        return result;
+        return bookedRoomDto;
     }
 
     private boolean roomIsAvailable(BookedRoom bookingRequest, List<BookedRoom> existingBookings) {
