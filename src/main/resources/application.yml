@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    username: kento
-    password: password
-    url: jdbc:mysql://localhost:3307/miracle_hotel_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_HOST}/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
@@ -17,8 +17,8 @@ spring:
 
   servlet:
     multipart:
-      max-file-size: 5MB
-      max-request-size: 5MB
+      max-file-size: 200MB
+      max-request-size: 200MB
       file-size-threshold: 2KB
 
   logging:

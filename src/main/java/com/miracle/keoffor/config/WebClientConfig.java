@@ -6,7 +6,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
 public class WebClientConfig {
-    private final static String BASEURL = "http://localhost:9193/payment";
+    private final static String BASEURL = "http://dev.kenstudy.com/payment";
     @Bean
     public WebClient webClient() {
 
