@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miracle-payment-deploy
+spec:
+  selector:
+    matchLabels:
+      app: miracle-payment-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: miracle-payment-app
+    spec:
+      containers:
+        - name: miracle-payment-app
+          image: keoffor/miracle-payment-app:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9193
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_NAME
+              value: payment_transactions
+            - name: DB_USERNAME
+              value: user2
+            - name: DB_PASSWORD
+              value: password2
+      initContainers:
+        - name: init-mysql-svc
+          image: busybox:1.28
+          command: [ 'sh', '-c', "until nslookup mysql.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mysql-db; sleep 2; done" ]

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miracle-client-deploy
+spec:
+  selector:
+    matchLabels:
+      app: miracle-client-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: miracle-client-app
+    spec:
+      containers:
+        - name: miracle-client-app
+          image: keoffor/miracle-client-app:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

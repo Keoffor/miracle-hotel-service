@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miracle-main-deploy
+spec:
+  selector:
+    matchLabels:
+      app: miracle-main-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: miracle-main-app
+    spec:
+      containers:
+        - name: miracle-main-app
+          image: keoffor/miracle-main-app:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9192
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_NAME
+              value: miracle_hotel_db
+            - name: DB_USERNAME
+              value: user1
+            - name: DB_PASSWORD
+              value: password1
+      initContainers:
+        - name: init-mysql-svc
+          image: busybox:1.28
+          command: [ 'sh', '-c', "until nslookup mysql.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mysql-db; sleep 2; done" ]

@@ -1,6 +1,5 @@
 package com.miracle.keoffor.controller;
 
-import com.miracle.keoffor.model.User;
 import com.miracle.keoffor.model.dtos.UserDto;
 import com.miracle.keoffor.service.UserService;
 import lombok.RequiredArgsConstructor;

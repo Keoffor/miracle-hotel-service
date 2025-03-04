@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-init-config
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS miracle_hotel_db;
+    CREATE DATABASE IF NOT EXISTS payment_transactions;
+    CREATE USER 'user1'@'%' IDENTIFIED BY 'password1';
+    CREATE USER 'user2'@'%' IDENTIFIED BY 'password2';
+    GRANT ALL PRIVILEGES ON miracle_hotel_db.* TO 'user1'@'%';
+    GRANT ALL PRIVILEGES ON payment_transactions.* TO 'user2'@'%';
+    FLUSH PRIVILEGES;
